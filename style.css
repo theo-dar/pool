@@ -1,0 +1,119 @@
+/* ===== Couleurs et base ===== */
+:root {
+  --bleu: #2a78d6;
+  --orange: #eb6834;
+  --rouge: #d03b3b;
+  --vert: #0ca30c;
+  --fond: #f6f5f2;
+  --carte: #ffffff;
+  --encre: #0b0b0b;
+  --encre2: #6a6964;
+  --ligne: #e4e3de;
+  --piste: #ecebe6;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: -apple-system, "Segoe UI", system-ui, sans-serif;
+  background: var(--fond);
+  color: var(--encre);
+  padding-bottom: calc(80px + env(safe-area-inset-bottom));
+}
+main { max-width: 640px; margin: 0 auto; padding: 16px; padding-top: calc(16px + env(safe-area-inset-top)); }
+h1 { font-size: 22px; margin: 4px 0 12px; }
+h2 { font-size: 16px; margin: 22px 0 8px; color: var(--encre2); font-weight: 600; }
+button { font: inherit; cursor: pointer; }
+input { font: inherit; }
+
+/* ===== Vues : une seule visible à la fois ===== */
+.vue { display: none; }
+.vue.active { display: block; }
+
+/* ===== Cartes ===== */
+.carte { background: var(--carte); border-radius: 14px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 2px rgba(0,0,0,.05); }
+
+/* ===== Le gros chiffre du pool ===== */
+.pool-reste { font-size: 46px; font-weight: 700; line-height: 1; margin: 6px 0; }
+.pool-reste.negatif { color: var(--rouge); }
+.sous { color: var(--encre2); font-size: 14px; }
+
+/* ===== Barres de progression ===== */
+.barre { height: 10px; background: var(--piste); border-radius: 5px; overflow: hidden; margin: 10px 0 4px; }
+.barre > div { height: 100%; background: var(--bleu); border-radius: 5px; }
+.barre > div.depasse { background: var(--rouge); }
+.barre.petite { height: 6px; margin: 4px 0 0; }
+
+.ligne-cat { padding: 8px 0; border-bottom: 1px solid var(--ligne); }
+.ligne-cat:last-child { border-bottom: none; }
+.ligne-cat .haut { display: flex; justify-content: space-between; font-size: 14px; }
+.ligne-cat .haut span:last-child { color: var(--encre2); }
+
+/* ===== Liste de transactions ===== */
+.tx { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--ligne); gap: 8px; }
+.tx:last-child { border-bottom: none; }
+.tx .info { flex: 1; min-width: 0; }
+.tx .info div:first-child { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tx .info div:last-child { font-size: 12px; color: var(--encre2); }
+.tx .montant { font-weight: 600; white-space: nowrap; }
+.tx .montant.revenu { color: var(--vert); }
+.tx .suppr { background: none; border: none; color: var(--encre2); font-size: 18px; padding: 0 4px; }
+
+/* ===== Petits chiffres côte à côte ===== */
+.stats { display: flex; gap: 12px; }
+.stats > div { flex: 1; }
+.stats b { display: block; font-size: 20px; }
+
+/* ===== Badges ===== */
+.badge { font-size: 11px; padding: 2px 7px; border-radius: 10px; background: #fde9e1; color: #a8431b; margin-left: 6px; }
+
+/* ===== Bouton + flottant ===== */
+.fab {
+  position: fixed; right: 20px; bottom: calc(80px + env(safe-area-inset-bottom));
+  width: 60px; height: 60px; border-radius: 50%; border: none;
+  background: var(--bleu); color: white; font-size: 32px; box-shadow: 0 4px 12px rgba(42,120,214,.4);
+}
+
+/* ===== Navigation du bas ===== */
+nav {
+  position: fixed; bottom: 0; left: 0; right: 0; display: flex; background: var(--carte);
+  border-top: 1px solid var(--ligne); padding-bottom: env(safe-area-inset-bottom);
+}
+nav button { flex: 1; background: none; border: none; padding: 16px 0; color: var(--encre2); font-size: 14px; }
+nav button.active { color: var(--bleu); font-weight: 600; }
+
+/* ===== Formulaire d'ajout ===== */
+dialog { border: none; border-radius: 16px; padding: 18px; width: min(92vw, 460px); }
+dialog::backdrop { background: rgba(0,0,0,.35); }
+#form-ajout { display: flex; flex-direction: column; gap: 12px; }
+#form-ajout input[type=text], #form-ajout input[type=date], #form-ajout input[type=number], .champ {
+  padding: 12px; border: 1px solid var(--ligne); border-radius: 10px; width: 100%; background: white;
+}
+#champ-montant { font-size: 30px; text-align: center; font-weight: 700; }
+.toggle { display: flex; gap: 8px; }
+.toggle label { flex: 1; text-align: center; padding: 10px; border-radius: 10px; background: var(--piste); }
+.toggle input { display: none; }
+.toggle label:has(input:checked) { background: var(--bleu); color: white; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chips button { border: 1px solid var(--ligne); background: white; border-radius: 18px; padding: 7px 12px; font-size: 14px; }
+.chips button.choisi { background: var(--bleu); color: white; border-color: var(--bleu); }
+.actions { display: flex; gap: 8px; }
+.actions button { flex: 1; padding: 12px; border-radius: 10px; border: none; }
+.principal { background: var(--bleu); color: white; }
+.secondaire { background: var(--piste); color: var(--encre); }
+
+/* ===== Réglages ===== */
+.reglage { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--ligne); }
+.reglage:last-child { border-bottom: none; }
+.reglage input { width: 110px; padding: 8px; border: 1px solid var(--ligne); border-radius: 8px; text-align: right; }
+.bouton-plein { width: 100%; padding: 12px; border-radius: 10px; border: none; margin-top: 8px; }
+.vide { color: var(--encre2); font-size: 14px; padding: 8px 0; }
+
+/* ===== Historique : barres par semaine ===== */
+.semaine-hist { display: grid; grid-template-columns: 62px 1fr 72px 76px; align-items: center; gap: 8px; padding: 6px 0; font-size: 13px; }
+.semaine-hist .barre { margin: 0; }
+.semaine-hist span:last-child { text-align: right; }
+
+/* ===== Ajouts v2 ===== */
+.vert { color: var(--vert); }
+.rouge { color: var(--rouge); }
+.petit-bouton { border: none; background: var(--bleu); color: white; border-radius: 8px; padding: 7px 12px; font-size: 13px; }

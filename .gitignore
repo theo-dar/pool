@@ -1,0 +1,5 @@
+# Tes données financières ne doivent JAMAIS aller sur GitHub (le dépôt peut être public)
+*.csv
+*.pdf
+*.json
+!manifest.json

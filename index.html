@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Pool</title>
+  <!-- Ces lignes permettent d'installer l'app sur l'écran d'accueil de l'iPad -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Pool">
+  <meta name="theme-color" content="#2a78d6">
+  <link rel="icon" href="icon.svg">
+  <link rel="apple-touch-icon" href="icon-180.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Chaque <section class="vue"> est un « écran ». app.js en affiche un seul à la fois. -->
+  <main>
+    <section id="vue-semaine" class="vue active"></section>
+    <section id="vue-historique" class="vue"></section>
+    <section id="vue-abos" class="vue"></section>
+    <section id="vue-tips" class="vue"></section>
+    <section id="vue-plus" class="vue"></section>
+  </main>
+
+  <!-- Bouton + flottant : ouvre le formulaire d'ajout rapide -->
+  <button id="btn-ajouter" class="fab" aria-label="Ajouter une dépense">+</button>
+
+  <!-- Formulaire d'ajout (caché tant qu'on n'appuie pas sur +) -->
+  <dialog id="dialog-ajout">
+    <form id="form-ajout" method="dialog">
+      <div class="toggle">
+        <label><input type="radio" name="type" value="depense" checked> Dépense</label>
+        <label><input type="radio" name="type" value="revenu"> Revenu</label>
+      </div>
+      <input id="champ-montant" name="montant" type="number" inputmode="decimal" step="0.01" min="0" placeholder="0,00 $" required>
+      <div id="choix-categories" class="chips"></div>
+      <input name="note" type="text" placeholder="Note (optionnel) — ex. Tim Hortons">
+      <input name="date" type="date" required>
+      <div class="actions">
+        <button type="button" id="btn-annuler" class="secondaire">Annuler</button>
+        <button type="submit" class="principal">Ajouter</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Barre de navigation du bas -->
+  <nav>
+    <button data-vue="semaine" class="active">Semaine</button>
+    <button data-vue="historique">Historique</button>
+    <button data-vue="tips">Tips</button>
+    <button data-vue="abos">Abos</button>
+    <button data-vue="plus">Plus</button>
+  </nav>
+
+  <script src="app.js"></script>
+</body>
+</html>
